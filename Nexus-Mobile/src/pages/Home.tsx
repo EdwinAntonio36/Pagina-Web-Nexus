@@ -1,14 +1,16 @@
 import Hero from "../components/Hero";
-import FeatureStrip from "../components/FeatureStrip";
 import Solutions from "../components/Solutions";
+import FeatureStrip from "../components/FeatureStrip";
 import Brands from "../components/Brands";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <FeatureStrip />
-      <Solutions />
+      <div className="hero-block">
+        <Hero />
+        <Solutions />
+        <FeatureStrip />
+      </div>
       <Brands />
     </>
   );

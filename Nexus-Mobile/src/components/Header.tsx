@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 const navLinks = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/#nosotros" },
-  { label: "Soluciones", href: "/#soluciones" },
-  { label: "Empresas", href: "/#empresas" },
+  { label: "Equipos", href: "/equipos" },
+  { label: "Empresas", href: "/empresas" },
   { label: "FAQs", href: "/faqs" },
 ];
 
@@ -15,7 +15,7 @@ export default function Header() {
     <header>
       <div className="wrap nav">
         <Link to="/" className="logo-slot" title="Nexus Mobile">
-          <img src="/logov2.png" alt="Nexus Mobile" />
+          <img src="/logo.png" alt="Nexus Mobile" />
         </Link>
 
         <nav className="navlinks">
