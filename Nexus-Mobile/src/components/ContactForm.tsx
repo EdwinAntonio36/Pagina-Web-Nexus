@@ -76,27 +76,14 @@ export default function ContactForm() {
     setStatus("submitting");
 
     try {
-      // ------------------------------------------------------------------
-      // AQUÍ VA LA CONEXIÓN AL BACKEND (todavía sin definir).
-      //
-      // Opción Formspree:
-      // const res = await fetch("https://formspree.io/f/TU_ID", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json", Accept: "application/json" },
-      //   body: JSON.stringify(data),
-      // });
-      // if (!res.ok) throw new Error("Error al enviar");
-      //
-      // Opción API propia (ej. Vercel Functions):
-      // const res = await fetch("/api/contacto", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(data),
-      // });
-      // if (!res.ok) throw new Error("Error al enviar");
-      // ------------------------------------------------------------------
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7YqXsDBO1TWSX1GEd1lV0nUXqDkl1Q6R9D1aTHSigBJ2FcXYKvtcbeu4EdnF5Ozh_/exec";
 
-      await new Promise((resolve) => setTimeout(resolve, 700)); // simulación temporal, quitar al conectar backend real
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Apps Script no soporta CORS normal — necesario para que funcione
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
       setStatus("success");
       setData(initialData);
