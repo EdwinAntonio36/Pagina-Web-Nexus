@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { supabase } from "../lib/supabase";
 
 interface FormData {
   nombre: string;
@@ -68,6 +69,7 @@ export default function ContactForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
 
     const validationErrors = validar(data);
     setErrors(validationErrors);
@@ -76,14 +78,15 @@ export default function ContactForm() {
     setStatus("submitting");
 
     try {
-      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7YqXsDBO1TWSX1GEd1lV0nUXqDkl1Q6R9D1aTHSigBJ2FcXYKvtcbeu4EdnF5Ozh_/exec";
-
-      await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors", // Apps Script no soporta CORS normal — necesario para que funcione
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      if (!supabase) throw new Error("Supabase no está configurado");
+      const { error } = await supabase.from("cotizaciones").insert({
+        nombre: data.nombre.trim(),
+        telefono: data.telefono.replace(/\D/g, ""),
+        email: data.email.trim(),
+        interes: data.interes,
+        mensaje: data.mensaje.trim() || null,
       });
+      if (error) throw error;
 
       setStatus("success");
       setData(initialData);

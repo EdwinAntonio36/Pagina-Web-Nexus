@@ -45,7 +45,7 @@ function getCapacities(products: Product[]): string[] {
 }
 
 export default function Equipos() {
-  const { products, loading, usingFallback } = useProducts();
+  const { products, loading, error } = useProducts();
 
   const [selectedBrands, setSelectedBrands] = useState<Set<string>>(new Set());
   const [priceRangeIndex, setPriceRangeIndex] = useState(0);
@@ -110,12 +110,6 @@ export default function Equipos() {
         <div className="equipos-head">
           <h1>Encuentra tu próximo equipo</h1>
         </div>
-
-        {usingFallback && (
-          <p style={{ textAlign: "center", color: "#93A3C2", fontSize: 13, marginBottom: 24 }}>
-            Mostrando catálogo de ejemplo (aún no se configuró la hoja de Google Sheets).
-          </p>
-        )}
 
         <div className="equipos-layout">
           {/* Filtros — barra lateral */}
@@ -191,6 +185,8 @@ export default function Equipos() {
           <div className="equipos-main">
             {loading ? (
               <p style={{ textAlign: "center", color: "#93A3C2" }}>Cargando productos...</p>
+            ) : error ? (
+              <p role="alert">{error}</p>
             ) : filteredProducts.length === 0 ? (
               <p style={{ textAlign: "center", color: "#93A3C2" }}>
                 No hay productos que coincidan con estos filtros.

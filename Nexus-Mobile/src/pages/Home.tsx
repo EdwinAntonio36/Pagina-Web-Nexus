@@ -1,17 +1,15 @@
-import Hero from "../components/Hero";
+import HomeCarousel from "../components/HomeCarousel";
 import Solutions from "../components/Solutions";
 import FeatureStrip from "../components/FeatureStrip";
-import Brands from "../components/Brands";
 
 export default function Home() {
   return (
     <>
       <div className="hero-block">
-        <Hero />
+        <HomeCarousel />
         <Solutions />
         <FeatureStrip />
       </div>
-      <Brands />
     </>
   );
 }

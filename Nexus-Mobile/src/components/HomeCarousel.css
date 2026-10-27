@@ -1,0 +1,13 @@
+.home-carousel { position: relative; width: 100%; background: #060e1f; }
+.home-carousel-frame { aspect-ratio: 3 / 1; max-height: 520px; }
+.home-carousel-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); border: 1px solid #ffffff66; background: #060e1fbf; color: white; border-radius: 50%; width: 44px; height: 44px; font-size: 32px; cursor: pointer; }
+.carousel-prev { left: 16px; } .carousel-next { right: 16px; }
+.carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 10px 16px; }
+.carousel-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.carousel-dots button { width: 24px; height: 24px; border: none; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.carousel-dots button::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8192ae; }
+.carousel-dots button.active::after { background: #5b93ff; width: 12px; height: 12px; }
+.carousel-pause { background: none; border: 1px solid #8192ae; color: white; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.home-carousel button:focus-visible { outline: 3px solid #5b93ff; outline-offset: 3px; }
+@media (max-width: 760px) { .home-carousel-frame { aspect-ratio: 16 / 9; } .carousel-prev { left: 8px; } .carousel-next { right: 8px; } }

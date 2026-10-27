@@ -68,7 +68,7 @@ function SpecIcon({ type }: { type: ProductSpec["icon"] }) {
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { products, loading } = useProducts();
+  const { products, loading, error } = useProducts();
   const product = products.find((p) => p.id === id);
 
   const [activeImage, setActiveImage] = useState(0);
@@ -84,6 +84,13 @@ export default function ProductDetail() {
         </div>
       </section>
     );
+  }
+
+  if (error) {
+    return <section className="product-detail"><div className="wrap">
+      <p role="alert">{error}</p>
+      <Link to="/equipos" className="link-arrow">Volver a Equipos</Link>
+    </div></section>;
   }
 
   if (!product) {
