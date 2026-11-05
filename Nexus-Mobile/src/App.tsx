@@ -8,6 +8,11 @@ import Empresas from "./pages/Empresas";
 import Nosotros from "./pages/Nosotros";
 import ProductDetail from "./pages/ProductDetail";
 import Admin from "./pages/Admin";
+import ClientPortal from "./pages/ClientPortal";
+import ClientPassword from "./pages/ClientPassword";
+import StorageNotice from "./components/StorageNotice";
+import LegalPage from "./pages/LegalPage";
+import LegalFooter from "./components/LegalFooter";
 import "./App.css";
 
 function App() {
@@ -15,6 +20,10 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/privacidad" element={<LegalPage type="privacy" />} />
+        <Route path="/terminos" element={<LegalPage type="terms" />} />
+        <Route path="/clientes" element={<ClientPortal />} />
+        <Route path="/clientes/recuperar" element={<ClientPassword />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/" element={<Home />} />
         <Route path="/faqs" element={<Faqs />} />
@@ -24,6 +33,8 @@ function App() {
         <Route path="/empresas" element={<Empresas />} />
         <Route path="/nosotros" element={<Nosotros />} />
       </Routes>
+      <LegalFooter />
+      <StorageNotice />
     </>
   );
 }

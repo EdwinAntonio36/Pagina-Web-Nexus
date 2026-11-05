@@ -1,0 +1,76 @@
+/* Solo el inicio: las páginas de catálogo y administración conservan su scroll. */
+.hero-block.home-viewport {
+  height: calc(100svh - 96px - var(--legal-footer-height, 64px));
+  height: calc(100dvh - 96px - var(--legal-footer-height, 64px));
+  flex: none;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.home-viewport .home-carousel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.home-viewport .home-carousel-frame {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+  max-height: none;
+}
+.home-viewport .carousel-controls { flex: none; padding: 4px 12px; }
+.home-viewport .carousel-dots { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }
+.home-viewport .carousel-dots button { flex: 0 0 24px; }
+.home-viewport .hero { min-height: 0; padding: clamp(8px, 3dvh, 32px) 0; align-items: center; }
+.home-viewport .hero h1 { margin: 0; font-size: clamp(26px, 5dvh, 56px); }
+.home-viewport .hero p { margin: 12px 0 0; font-size: clamp(12px, 1.9dvh, 16px); }
+.home-viewport .soluciones-float { margin: 0; padding: 8px 0 12px; min-width: 0; }
+.home-viewport .sol-panel { min-width: 0; }
+.home-viewport .sol-intro-mini { flex: 1.2 1 0; min-width: 0; padding: 16px; }
+.home-viewport .sol-intro-mini h2 { font-size: 20px; margin: 0 0 8px; }
+.home-viewport .sol-intro-mini .kicker { margin-bottom: 8px; }
+.home-viewport .sol-intro-mini p { font-size: 12px; margin-bottom: 8px; }
+.home-viewport .sol-item-thumb { height: clamp(48px, 12dvh, 120px); }
+.home-viewport .sol-item-body { padding: 14px; gap: 6px; }
+.home-viewport .sol-item h3 { font-size: 12px; }
+.home-viewport .sol-item p { font-size: 12px; }
+.home-viewport .sol-panel:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 2px; }
+
+/* Una sola fila deslizable evita apilar seis tarjetas en celulares/tabletas. */
+@media (max-width: 1199px), (max-height: 699px) {
+  .home-viewport .sol-panel {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #5b93ff #0b1830;
+    background: rgba(6,14,31,.55);
+  }
+  .home-viewport .sol-panel > * {
+    flex: 0 0 clamp(240px, 70vw, 360px);
+    scroll-snap-align: start;
+    border: 0;
+    border-right: 1px solid var(--line);
+  }
+  .home-viewport .sol-panel > :last-child { border-right: 0; }
+  .home-viewport .sol-item-thumb { height: clamp(40px, 10dvh, 100px); }
+  .home-viewport .sol-intro-mini { padding: 14px; }
+  .home-viewport .sol-intro-mini h2 { font-size: 18px; }
+  .home-viewport .sol-item-body { padding: 12px; }
+}
+@media (max-height: 499px) {
+  .home-viewport .soluciones-float { padding: 4px 0; }
+  .home-viewport .sol-panel > * { flex-basis: min(82vw, 520px); }
+  .home-viewport .sol-intro-mini { padding: 8px 12px; }
+  .home-viewport .sol-intro-mini .kicker { font-size: 10px; margin-bottom: 3px; }
+  .home-viewport .sol-intro-mini h2 { font-size: 16px; margin-bottom: 4px; }
+  .home-viewport .sol-intro-mini p { margin-bottom: 4px; }
+  .home-viewport .sol-item { flex-direction: row; }
+  .home-viewport .sol-item-thumb { height: auto; width: 60px; }
+  .home-viewport .sol-item-body { padding: 8px; }
+  .home-viewport .hero h1 { font-size: 24px; }
+  .home-viewport .hero p { margin-top: 6px; }
+}

@@ -1,0 +1,8 @@
+:root { --legal-footer-height: 64px; }
+.legal-footer { flex: none; width: 100%; height: var(--legal-footer-height); box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 20px; padding: 12px 24px; border-top: 1px solid #ffffff12; background: #060e1f; color: #98acc9; text-align: center; font-size: 11px; line-height: 1.5; }
+.legal-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.legal-footer a, .legal-footer button { color: #b2c8e7; }
+.legal-footer button { font: inherit; background: none; border: none; cursor: pointer; padding: 0; }
+.legal-footer a:hover, .legal-footer button:hover { color: white; text-decoration: underline; }
+.legal-footer :focus-visible { outline: 2px solid #5b93ff; outline-offset: 4px; }
+@media (max-width: 760px) { :root { --legal-footer-height: 96px; } .legal-footer { justify-content: center; padding: 10px 16px; } .legal-footer > span { width: 100%; } }

@@ -1,14 +1,13 @@
 import HomeCarousel from "../components/HomeCarousel";
 import Solutions from "../components/Solutions";
-import FeatureStrip from "../components/FeatureStrip";
+import "./Home.css";
 
 export default function Home() {
   return (
     <>
-      <div className="hero-block">
+      <div className="hero-block home-viewport">
         <HomeCarousel />
         <Solutions />
-        <FeatureStrip />
       </div>
     </>
   );

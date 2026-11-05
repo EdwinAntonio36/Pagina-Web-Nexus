@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { supabase } from "../lib/supabase";
+import { Link } from "react-router-dom";
 
 interface FormData {
   nombre: string;
@@ -186,7 +187,7 @@ export default function ContactForm() {
           Algo falló al enviar tu solicitud. Intenta de nuevo en unos minutos.
         </p>
       )}
-      <p className="form-note">Al enviar aceptas que te contactemos para darte seguimiento a tu solicitud.</p>
+      <p className="form-note">Usaremos tus datos para atender y dar seguimiento a esta solicitud. Consulta el <Link to="/privacidad" style={{ textDecoration: "underline" }}>aviso de privacidad</Link> antes de enviarla.</p>
     </form>
   );
 }

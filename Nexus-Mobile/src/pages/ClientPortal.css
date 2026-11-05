@@ -1,0 +1,33 @@
+.client-page { min-height: calc(100svh - 96px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 16px; background: radial-gradient(circle at 15% 0%, #2f80ed29, transparent 45%), radial-gradient(circle at 85% 10%, #4fc3f71a, transparent 40%), #080b14; }
+.client-login { width: 100%; max-width: 440px; padding: 32px 30px; background: #0b1220; border: 1px solid #78aaff24; border-radius: 18px; text-align: left; }
+.client-logo { display: block; max-width: 200px; height: 42px; object-fit: contain; margin: 0 auto 20px; }
+.client-login h1 { font-size: 24px; margin: 0 0 8px; color: #f3f6fb; text-align: center; }
+.client-sub { text-align: center; font-size: 14px; color: #a3aec2; margin-bottom: 24px; }
+.client-login fieldset { border: 0; min-width: 0; }
+.client-field { display: block; color: #b6c5dc; font-size: 13px; margin: 18px 0; }
+.client-field input { display: block; box-sizing: border-box; margin-top: 8px; width: 100%; min-width: 0; border: 1px solid #78aaff40; border-radius: 9px; background: #0f1626; padding: 12px; color: #f3f6fb; font: inherit; }
+.client-field input:focus { outline: 2px solid #4fc3f7; outline-offset: 2px; }
+.client-password { position: relative; }
+.client-password input { padding-right: 80px; }
+.client-password button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; color: #b6c5dc; padding: 6px; cursor: pointer; }
+.client-primary { width: 100%; padding: 13px; border: none; border-radius: 9px; background: linear-gradient(135deg, #2f80ed, #4fc3f7); color: #08111f; font-size: 15px; font-weight: 700; cursor: pointer; }
+.client-link { display: block; width: fit-content; border: 0; background: none; color: #71cafa; margin: 18px auto; cursor: pointer; font: inherit; font-size: 13px; }
+.client-help, .client-foot { color: #a3aec2; font-size: 12px; text-align: center; margin-top: 20px; }
+.client-foot { text-transform: uppercase; letter-spacing: .08em; }
+.client-error { padding: 14px; border: 1px solid #ae6262; border-radius: 10px; color: #ffbdbd; margin: 16px 0; }
+.client-notice { padding: 14px; color: #a1e6c1; }
+.client-dashboard { padding-top: 42px; padding-bottom: 56px; text-align: left; }
+.client-dashboard h1 { color: white; font-size: clamp(24px, 4vw, 36px); margin: 0 0 8px; }
+.client-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.client-actions, .client-tabs { display: flex; flex-wrap: wrap; gap: 12px; }
+.client-tabs { margin: 28px 0; }
+.client-records { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.client-record { border: 1px solid #78aaff24; border-radius: 14px; background: #0b1220; padding: 24px; overflow-wrap: anywhere; }
+.client-record h2 { font-size: 20px; color: white; }
+.client-record p { color: #b6c5dc; margin-top: 10px; }
+.client-badge { color: #94d4fb; border: 1px solid #78aaff40; border-radius: 20px; padding: 4px 12px; font-size: 13px; }
+.client-notes { white-space: pre-wrap; }
+.client-page button:disabled { opacity: .5; cursor: wait; }
+.header-actions { display: flex; gap: 10px; align-items: center; }
+.header-client-link { font-size: 13px; color: #b4d6ff; white-space: nowrap; }
+@media (max-width: 520px) { .header-actions { flex-direction: column; gap: 4px; } .header-actions .btn-outline { padding: 7px 10px; font-size: 12px; } }

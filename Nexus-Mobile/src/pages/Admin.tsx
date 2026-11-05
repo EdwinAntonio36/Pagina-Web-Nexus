@@ -4,6 +4,15 @@ import { supabase } from "../lib/supabase";
 import "./Admin.css";
 import AdminCatalog from "../components/AdminCatalog";
 import AdminCarousel from "../components/AdminCarousel";
+import AdminClients from "../components/AdminClients";
+import { Link } from "react-router-dom";
+
+const adminSections = [
+  { key: "quotes", label: "Cotizaciones", detail: "Solicitudes y seguimiento", path: "M4 4h16v16H4z M8 8h8 M8 12h8 M8 16h4" },
+  { key: "catalog", label: "Catálogo", detail: "Productos, precios e imágenes", path: "M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z" },
+  { key: "carousel", label: "Carrusel de inicio", detail: "Imágenes de la portada", path: "M3 5h18v14H3z M3 16l6-6 5 5 3-3 4 4 M16 9h.01" },
+  { key: "clients", label: "Clientes", detail: "Accesos, líneas y trámites", path: "M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8 M22 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" },
+] as const;
 
 const estados = ["pendiente", "contactada", "atendida", "cancelada"] as const;
 type Estado = typeof estados[number];
@@ -38,7 +47,7 @@ export default function Admin() {
   const [filter, setFilter] = useState("");
   const [total, setTotal] = useState(0);
   const [refresh, setRefresh] = useState(0);
-  const [section, setSection] = useState<"quotes" | "catalog" | "carousel">("quotes");
+  const [section, setSection] = useState<"quotes" | "catalog" | "carousel" | "clients">("quotes");
   const [catalogEditing, setCatalogEditing] = useState(false);
   const [catalogBusy, setCatalogBusy] = useState(false);
   const userId = session?.user.id;
@@ -130,12 +139,13 @@ export default function Admin() {
   if (!ready) return <section className="wrap admin-page"><p>Cargando sesión…</p></section>;
 
   return <section className="wrap admin-page">
-    <div className="admin-heading"><div><div className="kicker">Nexus Mobile</div><h1>Administración</h1></div>
-      {session && <button className="btn btn-line" disabled={busy || catalogBusy} onClick={() => void logout()}>Cerrar sesión</button>}
+    <div className="admin-heading admin-topbar"><div><div className="kicker">Nexus Mobile / Panel de control</div><h1>Administración</h1><p>Gestiona las solicitudes, los productos y los clientes.</p></div>
+      {session && <div className="admin-account"><span>{session.user.email}</span><button className="btn btn-line" disabled={busy || catalogBusy} onClick={() => void logout()}>Cerrar sesión</button></div>}
     </div>
     {error && <p className="admin-error" role="alert">{error}</p>}
     {!session ? <form className="admin-login" onSubmit={login}>
-      <h2>Iniciar sesión</h2>
+      <div className="admin-login-mark" aria-hidden="true">N</div>
+      <h2>Bienvenido de nuevo</h2><p className="admin-login-subtitle">Ingresa para administrar Nexus Mobile.</p>
       <div className="field"><label htmlFor="admin-email">Correo electrónico</label>
         <input id="admin-email" type="email" autoComplete="username" required value={email} onChange={(e) => setEmail(e.target.value)} /></div>
       <div className="field"><label htmlFor="admin-password">Contraseña</label>
@@ -143,34 +153,34 @@ export default function Admin() {
       <button className="btn btn-solid" disabled={busy}>{busy ? "Ingresando…" : "Entrar"}</button>
     </form> : access === "checking" ? <p>Verificando permisos…</p>
       : access === "denied" ? <p>Tu cuenta no tiene acceso al panel. Comprueba que se haya asignado el permiso de administrador en Supabase.</p>
-      : <>
-        <nav className="admin-toolbar" aria-label="Secciones de administración">
-          <button disabled={catalogBusy} className={`btn ${section === "quotes" ? "btn-solid" : "btn-line"}`} aria-pressed={section === "quotes"} onClick={() => {
-            if (catalogEditing && !window.confirm("¿Descartar los cambios sin guardar y abrir cotizaciones?")) return;
-            setCatalogEditing(false); setSection("quotes");
-          }}>Cotizaciones</button>
-          <button disabled={catalogBusy} className={`btn ${section === "catalog" ? "btn-solid" : "btn-line"}`} aria-pressed={section === "catalog"} onClick={() => {
-            if (section === "catalog") return;
-            if (catalogEditing && !window.confirm("¿Descartar los cambios sin guardar y abrir catálogo?")) return;
-            setCatalogEditing(false); setSection("catalog");
-          }}>Catálogo</button>
-          <button disabled={catalogBusy} className={`btn ${section === "carousel" ? "btn-solid" : "btn-line"}`} aria-pressed={section === "carousel"} onClick={() => {
-            if (section === "carousel") return;
-            if (catalogEditing && !window.confirm("¿Descartar los cambios sin guardar y abrir carrusel?")) return;
-            setCatalogEditing(false); setSection("carousel");
-          }}>Carrusel de inicio</button>
+      : <div className="admin-layout">
+        <nav className="admin-menu" aria-label="Secciones de administración">
+          <span className="admin-menu-caption">Administrar</span>
+          {adminSections.map((item) => <button key={item.key} disabled={catalogBusy} className={`admin-menu-item ${section === item.key ? "is-active" : ""}`}
+            aria-pressed={section === item.key} onClick={() => {
+              if (section === item.key) return;
+              if (catalogEditing && !window.confirm("¿Descartar los cambios sin guardar y cambiar de sección?")) return;
+              setCatalogEditing(false); setError(""); setSection(item.key);
+            }}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d={item.path} /></svg>
+            <span><strong>{item.label}</strong><small>{item.detail}</small></span>
+          </button>)}
+          <Link to="/" className="admin-public-link" onClick={(event) => {
+            if (catalogBusy || (catalogEditing && !window.confirm("¿Descartar los cambios sin guardar y abrir el sitio?"))) event.preventDefault();
+          }}>Ver sitio web <span aria-hidden="true">↗</span></Link>
         </nav>
-        {section === "catalog" ? <AdminCatalog key={userId} onEditingChange={setCatalogEditing} onBusyChange={setCatalogBusy} /> : section === "carousel" ? <AdminCarousel key={userId} onEditingChange={setCatalogEditing} onBusyChange={setCatalogBusy} /> : <>
-        <div className="admin-toolbar"><label htmlFor="admin-filter">Estado</label>
+        <main className="admin-workspace" key={section}>
+        {section === "catalog" ? <AdminCatalog key={userId} onEditingChange={setCatalogEditing} onBusyChange={setCatalogBusy} /> : section === "carousel" ? <AdminCarousel key={userId} onEditingChange={setCatalogEditing} onBusyChange={setCatalogBusy} /> : section === "clients" ? <AdminClients key={userId} onEditingChange={setCatalogEditing} onBusyChange={setCatalogBusy} /> : <>
+        <div className="admin-heading"><div><h2>Cotizaciones</h2><p>Consulta las solicitudes y actualiza su seguimiento.</p></div><span className="admin-count">{total} solicitudes</span></div>
+        <div className="admin-toolbar admin-filters"><label htmlFor="admin-filter">Estado</label>
           <select id="admin-filter" value={filter} disabled={saving !== null} onChange={(e) => { setFilter(e.target.value); setPage(0); }}>
             <option value="">Todos</option>{estados.map((estado) => <option key={estado}>{estado}</option>)}
           </select>
           <button className="btn btn-line" disabled={loading || saving !== null} onClick={() => setRefresh((value) => value + 1)}>Actualizar</button>
-          <span>{total} solicitudes</span>
         </div>
         {loading ? <p role="status">Cargando cotizaciones…</p> : rows.length === 0 ? <p>No hay solicitudes para mostrar.</p> :
-          <div className="admin-list">{rows.map((row) => <article className="admin-card" key={row.id}>
-            <div className="admin-heading"><div><h2>{row.nombre}</h2><time dateTime={row.created_at}>{new Date(row.created_at).toLocaleString("es-MX", { timeZone: "America/Mexico_City" })}</time></div>
+          <div className="admin-list admin-quotes">{rows.map((row) => <article className="admin-card admin-quote" key={row.id}>
+            <div className="admin-heading"><div><span className="admin-status" data-status={row.estado}>{row.estado}</span><h3>{row.nombre}</h3><time dateTime={row.created_at}>{new Date(row.created_at).toLocaleString("es-MX", { timeZone: "America/Mexico_City" })}</time></div>
               <div><label htmlFor={`estado-${row.id}`}>Estado </label><select id={`estado-${row.id}`} value={row.estado} disabled={saving !== null} onChange={(e) => void updateStatus(row.id, e.target.value as Estado)}>
                 {estados.map((estado) => <option key={estado}>{estado}</option>)}
               </select></div>
@@ -184,12 +194,13 @@ export default function Admin() {
             {row.mensaje && <div className="admin-message"><b>Mensaje</b><p>{row.mensaje}</p></div>}
             {saving === row.id && <p role="status">Guardando…</p>}
           </article>)}</div>}
-        <div className="admin-toolbar">
+        <div className="admin-toolbar admin-pagination">
           <button className="btn btn-line" disabled={page === 0 || loading || saving !== null} onClick={() => setPage((value) => value - 1)}>Anterior</button>
           <span>Página {page + 1}</span>
           <button className="btn btn-line" disabled={(page + 1) * PAGE_SIZE >= total || loading || saving !== null} onClick={() => setPage((value) => value + 1)}>Siguiente</button>
         </div>
       </>}
-      </>}
+        </main>
+      </div>}
   </section>;
 }

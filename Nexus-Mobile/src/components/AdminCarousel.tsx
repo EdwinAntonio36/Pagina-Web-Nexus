@@ -52,7 +52,7 @@ export default function AdminCarousel({ onBusyChange, onEditingChange }: {
   }
   return <div className="admin-card"><h2>Carrusel del inicio</h2>
     <p>Agrega tus imágenes y usa las flechas de las miniaturas para cambiar su orden. Para reemplazar una, quítala y sube la nueva.</p>
-    <p className="form-note">Recomendamos imágenes horizontales de 1800 × 600 píxeles. Máximo 20 imágenes. Si quitas todas, se mostrará la portada original.</p>
+    <p className="form-note">Las imágenes se ajustan completas y centradas, sin recortes. Para aprovechar mejor el espacio, recomendamos imágenes horizontales de 1800 × 600 píxeles; otros formatos pueden dejar márgenes. Máximo 20 imágenes. Si quitas todas, se mostrará la portada original.</p>
     {error && <p role="alert" className="admin-error">{error}</p>}{notice && <p role="status" className="catalog-notice">{notice}</p>}
     {loading ? <p role="status">Cargando carrusel…</p> : ready ? <>
       <CatalogImagePicker label="Imágenes del carrusel" multiple images={images} disabled={busy} onBusyChange={setUploading}

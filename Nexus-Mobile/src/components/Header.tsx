@@ -35,6 +35,8 @@ export default function Header() {
           })}
         </nav>
 
+        <div className="header-actions">
+        <Link to="/clientes" className="header-client-link">Acceso de clientes</Link>
         <Link to="/cotizacion" className="btn-outline">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
@@ -42,6 +44,7 @@ export default function Header() {
           </svg>
           Cotizar ahora
         </Link>
+        </div>
       </div>
     </header>
   );

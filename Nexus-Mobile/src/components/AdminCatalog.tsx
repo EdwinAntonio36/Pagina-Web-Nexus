@@ -199,7 +199,7 @@ export default function AdminCatalog({ onEditingChange, onBusyChange }: { onEdit
         <img src={product.image} alt={product.name} /><div><span>{product.brand} · {product.active ? "Visible" : "Oculto"}</span>
           <h3>{product.name}</h3><p>{product.price}</p><small>{product.id}</small>
           <div className="admin-toolbar"><button className="btn btn-line" disabled={busy} onClick={() => openEditor(product)}>Ver / Editar</button>
-            <button className="btn btn-line" disabled={busy || draft !== null} onClick={() => { setPendingDelete(product); setError(""); setNotice(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Eliminar</button>
+            <button className="btn btn-line admin-delete-action" disabled={busy || draft !== null} onClick={() => { setPendingDelete(product); setError(""); setNotice(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Eliminar</button>
           </div></div>
       </article>)}</div>}
   </div>;

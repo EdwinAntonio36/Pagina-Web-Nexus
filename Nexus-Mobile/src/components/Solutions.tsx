@@ -66,7 +66,7 @@ export default function Solutions() {
   return (
     <section className="soluciones-float" id="soluciones">
       <div className="wrap">
-        <div className="sol-panel">
+        <div className="sol-panel" tabIndex={0} role="region" aria-label="Soluciones; desplaza horizontalmente para ver más">
           <div className="sol-intro-mini">
             <div className="kicker">Nuestras soluciones</div>
             <h2>Conectividad para cada necesidad</h2>
@@ -80,7 +80,7 @@ export default function Solutions() {
           </div>
 
           {cards.map((card) => (
-            <div className="sol-item" key={card.title}>
+            <div className="sol-item" key={card.thumbImage}>
               {/* Imagen — coloca tu archivo en public/ y ajusta "thumbImage" arriba */}
               <div className="sol-item-thumb" title="Coloca aquí tu imagen">
                 <img src={card.thumbImage} alt="" />

@@ -1,0 +1,21 @@
+.storage-notice { position: fixed; z-index: 1400; inset: auto 20px 20px; margin-inline: auto; max-width: 960px; display: flex; align-items: center; gap: 24px; padding: 20px 24px; border: 1px solid #6488bb55; border-radius: 16px; background: #0c172bf5; box-shadow: 0 12px 48px #0008; color: #eef4ff; text-align: left; }
+.storage-notice-copy { flex: 1; min-width: 0; }
+.storage-notice strong { font-size: 15px; }
+.storage-notice p { font-size: 12px; line-height: 1.65; color: #afc1db; margin-top: 6px; }
+.storage-notice-actions { display: flex; flex-wrap: wrap; gap: 10px; flex: none; }
+.storage-primary, .storage-secondary { border: 1px solid #6488bb66; border-radius: 8px; padding: 11px 16px; font: 600 12px/1.5 var(--body, sans-serif); cursor: pointer; }
+.storage-primary { background: #2f6fed; color: white; border-color: #2f6fed; }
+.storage-secondary { background: transparent; color: #d1e1f7; }
+.storage-reopen { position: fixed; z-index: 1200; left: 12px; bottom: 10px; border: 1px solid #6488bb44; background: #0c172bf0; color: #b9ccea; border-radius: 20px; padding: 7px 12px; font: 11px/1.5 var(--body, sans-serif); cursor: pointer; }
+.storage-dialog { position: fixed; inset: 0; margin: auto; width: min(600px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); overflow-y: auto; border: 1px solid #6488bb55; border-radius: 18px; padding: 28px; background: #0c172b; color: #edf4ff; text-align: left; }
+.storage-dialog::backdrop { background: #000a; }
+.storage-dialog-heading { display: flex; align-items: start; gap: 16px; justify-content: space-between; margin-bottom: 18px; }
+.storage-dialog h2 { font-size: 22px; color: white; margin: 0; }
+.storage-dialog p, .storage-dialog dd { font-size: 13px; line-height: 1.75; color: #afc1db; }
+.storage-dialog p { margin: 16px 0; }
+.storage-dialog dt { font-size: 13px; font-weight: 600; margin-top: 18px; margin-bottom: 6px; }
+.storage-dialog dd { margin: 0; }
+.storage-close { background: transparent; border: 0; color: #afc1db; font-size: 24px; cursor: pointer; padding: 0 6px; }
+.storage-dialog button:focus-visible, .storage-notice button:focus-visible, .storage-reopen:focus-visible { outline: 2px solid #8bb7ff; outline-offset: 3px; }
+@media (max-width: 640px) { .storage-notice { inset: auto 12px 12px; padding: 16px; gap: 12px; flex-direction: column; align-items: stretch; } .storage-notice-actions { justify-content: flex-end; } .storage-dialog { padding: 22px; } }
+@media (max-height: 450px) { .storage-notice { max-height: calc(100dvh - 24px); overflow-y: auto; } }
